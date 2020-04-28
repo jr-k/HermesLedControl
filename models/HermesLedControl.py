@@ -274,15 +274,6 @@ class HermesLedControl:
 				if self._params.debug:
 					self._logger.debug("On tts finished received but it wasn't for me")
 
-		elif message.topic == self._SUB_ON_PLAY_FINISHED:
-			if siteId == self._me:
-				if self._params.debug:
-					self._logger.debug('On play finished triggered')
-				self._ledsController.idle()
-			else:
-				if self._params.debug:
-					self._logger.debug("On play finished received but it wasn't for me")
-
 		elif message.topic == self._SUB_ON_LEDS_TOGGLE_ON:
 			if siteId == self._me:
 				if self._params.debug:
