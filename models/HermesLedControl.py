@@ -427,8 +427,8 @@ class HermesLedControl:
 			if isForMe:
 				if self._params.debug:
 					self._logger.debug('On leds idle triggered')
-				else:
-					self._ledsController.idle()
+
+				self._ledsController.idle()
 			else:
 				if self._params.debug:
 					self._logger.debug("On leds idle received but it wasn't for me")
@@ -438,8 +438,8 @@ class HermesLedControl:
 			if isForMe:
 				if self._params.debug:
 					self._logger.debug('On leds clear triggered')
-				else:
-					self._ledsController.clearLeds()
+
+				self._ledsController.clearLeds()
 			else:
 				if self._params.debug:
 					self._logger.debug("On leds clear received but it wasn't for me")
@@ -452,11 +452,9 @@ class HermesLedControl:
 				if 'animation' not in payload:
 					self._logger.error('Missing "animation" in payload for set manual animation leds')
 				else:
-					if 'duration' in payload:
-						threading.Timer(interval=int(payload['duration']), function=self._ledsController.idle, args=[]).start()
-
 					flush = payload.get('flush', False)
 					clear = payload.get('clear', False)
+					duration = self.safePayloadNumber(payload, 'duration', 0)
 
 					if clear:
 						self._ledsController.stickyAnimation = None
@@ -465,6 +463,7 @@ class HermesLedControl:
 						self._ledsController.putStickyPattern(
 							pattern=self._ledsController.pattern.animator.breath,
 							sticky=sticky,
+							duration=duration,
 							flush=flush,
 							color = self.safePayloadColor(payload, 'color'),
 							minBrightness = self.safePayloadNumber(payload, 'minBrightness', 2),
@@ -475,6 +474,7 @@ class HermesLedControl:
 						self._ledsController.putStickyPattern(
 							pattern=self._ledsController.pattern.animator.blink,
 							sticky=sticky,
+							duration=duration,
 							flush=flush,
 							color = self.safePayloadColor(payload, 'color'),
 							minBrightness = self.safePayloadNumber(payload, 'minBrightness', 2),
@@ -486,6 +486,7 @@ class HermesLedControl:
 						self._ledsController.putStickyPattern(
 							pattern=self._ledsController.pattern.animator.rotate,
 							sticky=sticky,
+							duration=duration,
 							flush=flush,
 							color = self.safePayloadColor(payload, 'color'),
 							speed = self.safePayloadNumber(payload, 'speed', 20),
@@ -496,6 +497,7 @@ class HermesLedControl:
 						self._ledsController.putStickyPattern(
 							pattern=self._ledsController.pattern.animator.doubleSidedFilling,
 							sticky=sticky,
+							duration=duration,
 							flush=flush,
 							color = self.safePayloadColor(payload, 'color'),
 							startAt = self.safePayloadNumber(payload, 'startAt', 0),
@@ -506,6 +508,7 @@ class HermesLedControl:
 						self._ledsController.putStickyPattern(
 							pattern=self._ledsController.pattern.animator.doublePingPong,
 							sticky=sticky,
+							duration=duration,
 							flush=flush,
 							color = self.safePayloadColor(payload, 'color'),
 							speed = self.safePayloadNumber(payload, 'speed', 20),
@@ -516,6 +519,7 @@ class HermesLedControl:
 						self._ledsController.putStickyPattern(
 							pattern=self._ledsController.pattern.animator.waitWheel,
 							sticky=sticky,
+							duration=duration,
 							flush=flush,
 							color = self.safePayloadColor(payload, 'color'),
 							speed = self.safePayloadNumber(payload, 'speed', 20),
@@ -526,12 +530,22 @@ class HermesLedControl:
 						self._ledsController.putStickyPattern(
 							pattern=self._ledsController.pattern.animator.relayRace,
 							sticky=sticky,
+							duration=duration,
 							flush=flush,
 							color = self.safePayloadColor(payload, 'color'),
 							relayColor = self.safePayloadColor(payload, 'relayColor'),
 							backgroundColor = self.safePayloadColor(payload, 'backgroundColor'),
 							speed = self.safePayloadNumber(payload, 'speed', 20),
 							startAt = self.safePayloadNumber(payload, 'startAt', 0)
+						)
+					elif payload['animation'] == 'rainbow':
+						self._ledsController.putStickyPattern(
+							pattern=self._ledsController.pattern.animator.rainbow,
+							sticky=sticky,
+							duration=duration,
+							flush=flush,
+							brightness = self.safePayloadNumber(payload, 'brightness', 255),
+							speed=self.safePayloadNumber(payload, 'speed', 100)
 						)
 			else:
 				if self._params.debug:
