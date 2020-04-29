@@ -218,9 +218,14 @@ class HermesLedControl:
 		if hasattr(message, 'payload') and message.payload:
 			payload = json.loads(message.payload.decode('UTF-8'))
 
+		noLeds = payload.get('noLeds', False)
+		
+		if noLeds:
+			return False
+		
 		siteId = payload.get('siteId')
-		sticky = 'sticky' in payload
-
+		sticky = payload.get('sticky', False)
+		
 		isForMe = siteId == self._me or siteId == "all"
 
 		if self._hotwordRegex.match(message.topic):
@@ -450,9 +455,8 @@ class HermesLedControl:
 					if 'duration' in payload:
 						threading.Timer(interval=int(payload['duration']), function=self._ledsController.idle, args=[]).start()
 
-					flush = 'flush' in payload and payload['flush']
-					sticky = 'sticky' in payload and payload['sticky']
-					clear = 'clear' in payload and payload['clear']
+					flush = payload.get('flush', False)
+					clear = payload.get('clear', False)
 
 					if clear:
 						self._ledsController.stickyAnimation = None
