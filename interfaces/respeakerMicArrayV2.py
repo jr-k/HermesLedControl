@@ -59,10 +59,11 @@ class RespeakerMicArrayV2(Interface):
 			return
 
 		index = ledNum * 4
+
 		self._colors[index] = red
 		self._colors[index + 1] = green
 		self._colors[index + 2] = blue
-		self._colors[index + 3] = brightness
+		self._colors[index + 3] = 255 if red == 0 and green == 0 and blue == 0 else brightness
 
 
 	def setPixelRgb(self, ledNum, color, brightness):

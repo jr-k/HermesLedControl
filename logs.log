@@ -1,0 +1,14 @@
+2020-04-30 00:37:26,296 [MainThread] - [INFO] - Starting Hermes Led Control v. 2.0.6
+2020-04-30 00:37:26,331 [MainThread] - [INFO] - Initializing HermesLedControl
+2020-04-30 00:37:26,417 [MainThread] - [INFO] - Initializing ProjectAlice settings
+2020-04-30 00:37:26,419 [MainThread] - [INFO] - Loading configurations
+2020-04-30 00:37:26,435 [MainThread] - [INFO] - Loaded 12 hardware references
+2020-04-30 00:37:26,438 [MainThread] - [INFO] - - Mqtt server set to localhost
+2020-04-30 00:37:26,440 [MainThread] - [INFO] - - Mqtt port set to 1885
+2020-04-30 00:37:26,442 [MainThread] - [INFO] - - Mqtt username set to jrkassistant
+2020-04-30 00:37:26,444 [MainThread] - [INFO] - - Mqtt password set to "hidden"
+2020-04-30 00:37:26,446 [MainThread] - [INFO] - - Client id set to salon
+2020-04-30 00:37:26,449 [MainThread] - [INFO] - - Hardware set to ReSpeaker Mic array v2
+2020-04-30 00:37:26,451 [MainThread] - [INFO] - - Using pgas as pattern with 12 leds
+2020-04-30 00:37:26,453 [MainThread] - [INFO] - Initializing leds controller
+2020-04-30 00:37:27,017 [MainThread] - [INFO] - Hermes Led Control started
