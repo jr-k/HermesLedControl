@@ -35,7 +35,7 @@ class PgasPattern(LedPattern):
 		# self._animator.blink(color=[255, 0, 0, 2], minBrightness=2, maxBrightness=20, speed=300, repeat=3)
 		# self._animator.comet(color=[255, 0, 0, 255], trail=3, startAt=0, speed=300)
 		# self._animator.relayRace(color=[255, 0, 0, 255],relayColor=[0, 0, 255, 255], backgroundColor=[0,255,0,255], startAt=0, speed=30)
-
+		pass
 
 
 	def listen(self, *args):
