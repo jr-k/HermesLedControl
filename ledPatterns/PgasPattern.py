@@ -61,23 +61,20 @@ class PgasPattern(LedPattern):
 		# time.sleep(6)
 		# self._animator.waitWheel(color=[0, 0, 255, 255], speed=20, backgroundColor=[255, 0, 0, 255], startAt=0, duration=5)
 
-		self._animator.windmill(colors=[
-			[0, 0, 255, 255],
-			[255, 0, 0, 255],
-			[0, 255, 0, 255],
-			[255, 255, 0, 255],
-		], smooth=True, speed=50)
+		# self._animator.windmill(colors=[
+		# 	[0, 0, 255, 255],
+		# 	[255, 0, 0, 255],
+		# 	[0, 255, 0, 255],
+		# 	[255, 255, 0, 255],
+		# ], smooth=True, speed=50)
 
 		# self.off()
 
 	def wakeup(self, *args):
-		self.showcase()
+		self._animator.doublePingPong(color=[0, 0, 255, 255], startAt=0, speed=30)
 
-		pass
 
 	def listen(self, *args):
-		start = self._controller.doa()
-		self._animator.doubleSidedFilling(color=[0, 0, 255, 25], startAt=start, direction=1, speed=50)
 		self._animator.breath(color=[0, 0, 255, 25], minBrightness=2, maxBrightness=25, speed=20)
 
 
@@ -86,7 +83,7 @@ class PgasPattern(LedPattern):
 
 
 	def speak(self, *args):
-		self._animator.breath(color=[255, 255, 255, 2], minBrightness=2, maxBrightness=20, speed=40)
+		self._animator.breath(color=[0, 255, 255, 25], minBrightness=2, maxBrightness=25, speed=40)
 
 
 	def idle(self):
@@ -95,16 +92,15 @@ class PgasPattern(LedPattern):
 
 	def onError(self, *args):
 		self._animator.blink(color=[255, 0, 0, 2], minBrightness=2, maxBrightness=20, speed=300, repeat=3)
-		self.off()
 
 
 	def onSuccess(self, *args):
-		self._animator.blink(color=[0, 0, 255, 2], minBrightness=2, maxBrightness=25, speed=320, repeat=3)
-		self.off()
+		pass
 
 
 	def onStart(self, *args):
-		self.wakeup()
+		self._animator.rainbow(brightness=255, speed=500, duration=3)
+
 
 
 	def onButton1(self, *args):
