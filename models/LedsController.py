@@ -430,6 +430,8 @@ class LedsController:
 
 	def onStop(self):
 		self._pattern.animation.clear()
+
+
 		self._pattern.onStop()
 
 		self._running = False

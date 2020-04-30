@@ -22,21 +22,58 @@ class PgasPattern(LedPattern):
 		super().__init__(controller)
 		self._dnd = False
 
+	def showcase(self):
+		self.off()
+
+		# self._animator.doubleSidedFilling(color=[255, 255, 255, 255], startAt=start, direction=1, speed=50)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[0, 0, 255, 255], startAt=start, direction=-1, speed=50, new=False)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[0, 255, 0, 255], startAt=start, direction=1, speed=50, new=False)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[255, 0, 255, 255], startAt=start, direction=-1, speed=50, new=False)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[255, 0, 0, 255], startAt=start, direction=1, speed=50, new=False)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[0, 255, 255, 255], startAt=start, direction=-1, speed=50, new=False)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[255, 127, 0, 255], startAt=start, direction=1, speed=50, new=False)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[255, 255, 255, 255], startAt=start, direction=-1, speed=50, new=False)
+		# time.sleep(0.1)
+		# self._animator.doubleSidedFilling(color=[0, 0, 0, 0], startAt=start, direction=1, speed=50, new=False)
+
+		# time.sleep(6)
+		# self._animator.doublePingPong(color=[0, 0, 255, 255], startAt=0, speed=30, duration=5)
+		# time.sleep(6)
+		# self._animator.blink(color=[255, 0, 0, 2], minBrightness=2, maxBrightness=20, speed=30, smooth=False, repeat=10)
+		# time.sleep(6)
+		# self._animator.breath(color=[0, 255, 0, 255], minBrightness=2, maxBrightness=25, speed=20, duration=5)
+		# time.sleep(6)
+		# self._animator.relayRace(color=[255, 0, 0, 255], relayColor=[0, 0, 255, 255], backgroundColor=[0, 255, 0, 255],
+		# 						 startAt=0, speed=30, duration=5)
+		# time.sleep(6)
+		# self._animator.rainbow(brightness=255, speed=30, duration=5)
+		# time.sleep(6)
+		# self._animator.wheelOverlap(colors=[[255, 255, 0], [0, 255, 0]], brightness=255, speed=30, duration=5)
+		# time.sleep(6)
+		# self._animator.rotate(color=[0, 0, 255, 255], speed=20, trail=4, duration=5)
+		# time.sleep(6)
+		# self._animator.waitWheel(color=[0, 0, 255, 255], speed=20, backgroundColor=[255, 0, 0, 255], startAt=0, duration=5)
+
+		self._animator.windmill(colors=[
+			[0, 0, 255, 255],
+			[255, 0, 0, 255],
+			[0, 255, 0, 255],
+			[255, 255, 0, 255],
+		], smooth=True, speed=50)
+
+		# self.off()
 
 	def wakeup(self, *args):
-		# start = self._controller.doa()
-		# self.off()
-		# self._animator.doubleSidedFilling(color=[255, 255, 255, 15], startAt=start, direction=1, speed=50)
-		# time.sleep(0.1)
-		# self._animator.doubleSidedFilling(color=[0, 0, 255, 25], startAt=start, direction=-1, speed=50)
-		# time.sleep(0.2)
-		# self._animator.doubleSidedFilling(color=[0, 0, 0, 0], startAt=start, direction=1, speed=50)
-		# self._animator.doublePingPong(color=[0, 0, 255, 255], startAt=0, speed=30)
-		# self._animator.blink(color=[255, 0, 0, 2], minBrightness=2, maxBrightness=20, speed=300, repeat=3)
-		# self._animator.comet(color=[255, 0, 0, 255], trail=3, startAt=0, speed=300)
-		# self._animator.relayRace(color=[255, 0, 0, 255],relayColor=[0, 0, 255, 255], backgroundColor=[0,255,0,255], startAt=0, speed=30)
-		pass
+		self.showcase()
 
+		pass
 
 	def listen(self, *args):
 		start = self._controller.doa()
@@ -66,74 +103,9 @@ class PgasPattern(LedPattern):
 		self.off()
 
 
-	def updating(self, *args):
-		image = [
-			[255, 0, 0, 2],
-			[255, 0, 0, 40],
-			[255, 0, 0, 100],
-			[255, 0, 0, 40],
-			[255, 0, 0, 2]
-		]
-
-		if len(image) < self._numLeds:
-			for _ in range(self.numLeds - len(image)):
-				image.append([0, 0, 0, 0])
-
-		self._animator.new(image=image)
-		self.animation.set()
-		while self.animation.isSet():
-			self._animator.rotateImage(-1)
-			time.sleep(0.05)
-
-
-	def setupMode(self, *args):
-		self._animator.doublePingPong(color=[0, 0, 255, 10], speed=20)
-
-
-	def dnd(self, *args):
-		self._animator.blink(color=[64, 0, 0, 2], minBrightness=2, maxBrightness=25, speed=250, repeat=5)
-		for i in range(self.numLeds - 1):
-			self._controller.setLedRGB(ledNum=i, color=[64, 0, 0], brightness=1)
-		self._controller.show()
-
-
-	def conError(self, *args):
-		image = [
-			[16, 0, 0, 2],
-			[255, 0, 0, 100],
-			[16, 0, 0, 2]
-		]
-
-		if len(image) < self._numLeds:
-			for _ in range(self.numLeds - len(image)):
-				image.append([0, 0, 0, 0])
-
-		self._animator.new(image=image)
-		self.animation.set()
-		while self.animation.isSet():
-			self._animator.rotateImage(1)
-			time.sleep(0.085)
-
-
-	def message(self, *args):
-		self._animator.breath(color=[255, 255, 0, 2], minBrightness=2, maxBrightness=8, speed=8)
-
-
-	def call(self, *args):
-		self.animation.set()
-		while self.animation.isSet():
-			self._animator.blink(color=[255, 255, 0, 2], minBrightness=2, maxBrightness=8, speed=40, repeat=5)
-			time.sleep(1)
-
-
 	def onStart(self, *args):
 		self.wakeup()
 
 
 	def onButton1(self, *args):
-		if self._dnd:
-			self._controller.clearLeds()
-		else:
-			self._controller.dnd()
-
-		self._dnd = not self._dnd
+		pass
