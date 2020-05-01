@@ -71,7 +71,7 @@ class PgasPattern(LedPattern):
 		# self.off()
 
 	def wakeup(self, *args):
-		self._animator.doublePingPong(color=[0, 0, 255, 255], startAt=0, speed=30)
+		self._animator.doublePingPong(color=[0, 0, 255, 255], startAt=0, speed=30, duration=2)
 
 
 	def listen(self, *args):
