@@ -51,8 +51,7 @@ class PixelRing:
 		self.write(0x20, [brightness])
 
 	def set_color_palette(self, a, b):
-		self.write(0x21,
-				   [(a >> 16) & 0xFF, (a >> 8) & 0xFF, a & 0xFF, 0, (b >> 16) & 0xFF, (b >> 8) & 0xFF, b & 0xFF, 0])
+		self.write(0x21, [(a >> 16) & 0xFF, (a >> 8) & 0xFF, a & 0xFF, 0, (b >> 16) & 0xFF, (b >> 8) & 0xFF, b & 0xFF, 0])
 
 	def set_vad_led(self, state):
 		self.write(0x22, [state])
