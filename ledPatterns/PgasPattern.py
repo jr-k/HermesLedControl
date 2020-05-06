@@ -75,15 +75,15 @@ class PgasPattern(LedPattern):
 
 
 	def listen(self, *args):
-		self._animator.breath(color=[0, 0, 255, 25], minBrightness=2, maxBrightness=25, speed=20)
+		self._animator.breath(color=[0, 0, 255, 25], minBrightness=2, maxBrightness=25, speed=20, duration=8)
 
 
 	def think(self, *args):
-		self._animator.rotate(color=[0, 0, 255, 25], speed=20, trail=int(self.numLeds / 3))
+		self._animator.rotate(color=[0, 0, 255, 25], speed=20, trail=int(self.numLeds / 3), duration=8)
 
 
 	def speak(self, *args):
-		self._animator.breath(color=[0, 255, 255, 25], minBrightness=2, maxBrightness=25, speed=40)
+		self._animator.breath(color=[0, 255, 255, 25], minBrightness=2, maxBrightness=25, speed=40, duration=20)
 
 
 	def idle(self):
@@ -99,7 +99,7 @@ class PgasPattern(LedPattern):
 
 
 	def onStart(self, *args):
-		self._animator.rainbow(brightness=255, speed=500, duration=3)
+		self._animator.rainbow(brightness=255, speed=500, duration=2)
 
 
 
