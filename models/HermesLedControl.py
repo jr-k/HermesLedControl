@@ -10,6 +10,8 @@ from paho.mqtt.client import MQTTMessage
 
 from models.LedsController import LedsController
 
+from models.ConfigManager import ConfigManager
+
 
 class HermesLedControl:
 
@@ -17,6 +19,10 @@ class HermesLedControl:
 	_SUB_ON_SAY 					= 'hermes/tts/say'
 	_SUB_ON_THINK 					= 'hermes/asr/textCaptured'
 	_SUB_ON_LISTENING 				= 'hermes/asr/startListening'
+
+	_SUB_ON_HOTWORD_TOGGLE_OFF 		= 'hermes/hotword/toggleOff'
+	_SUB_ON_DIALOGUE_SESSON_STARTED	= 'hermes/dialogueManager/sessionStarted'
+
 	_SUB_ON_HOTWORD_TOGGLE_ON 		= 'hermes/hotword/toggleOn'
 	_SUB_LEDS_ON_ERROR 				= 'hermes/nlu/intentNotRecognized'
 	_SUB_LEDS_ON_SUCCESS 			= 'hermes/nlu/intentParsed'
@@ -48,6 +54,7 @@ class HermesLedControl:
 
 		self._mqttClient 			= None
 		self._hardwareReference 	= None
+		self._configManager 		= None
 		self._ledsController 		= None
 		self._params 				= params
 
@@ -130,6 +137,7 @@ class HermesLedControl:
 			self._hardware['endFrame'] = params.endFrame
 
 
+		self._configManager = ConfigManager()
 		self._ledsController = LedsController(self)
 		self._mqttClient = self.connectMqtt()
 
@@ -190,6 +198,7 @@ class HermesLedControl:
 			(self._SUB_ON_TTS_FINISHED, 0),
 			(self._SUB_ON_LEDS_TOGGLE_ON, 0),
 			(self._SUB_ON_LEDS_TOGGLE_OFF, 0),
+			(self._SUB_ON_DIALOGUE_SESSON_STARTED, 0),
 			(self._SUB_ON_LEDS_TOGGLE, 0),
 			(self._SUB_LEDS_ON_ERROR, 0),
 			(self._SUB_LEDS_ON_SUCCESS, 0),
@@ -228,14 +237,15 @@ class HermesLedControl:
 		
 		isForMe = siteId == self._me or siteId == "all"
 
-		if self._hotwordRegex.match(message.topic):
+		if message.topic == self._SUB_ON_DIALOGUE_SESSON_STARTED:
 			if isForMe:
 				if self._params.debug:
 					self._logger.debug('On hotword triggered')
-				self._ledsController.wakeup(sticky)
+				self._ledsController.wakeup(siteId, sticky)
 			else:
 				if self._params.debug:
 					self._logger.debug("On hotword received but it wasn't for me")
+				self._ledsController.wakeupOther(siteId, sticky)
 
 		elif message.topic == self._SUB_ON_LISTENING:
 			if isForMe:

@@ -21,6 +21,7 @@ class PgasPattern(LedPattern):
 	def __init__(self, controller):
 		super().__init__(controller)
 		self._dnd = False
+		self._me = self._controller._mainClass._me
 
 	def showcase(self):
 		self.off()
@@ -70,8 +71,17 @@ class PgasPattern(LedPattern):
 
 		# self.off()
 
-	def wakeup(self, *args):
-		self._animator.doublePingPong(color=[0, 0, 255, 255], startAt=0, speed=30, duration=2)
+	def wakeupOther(self, siteId):
+		if siteId != self._me:
+			self.wakeup(siteId=siteId)
+
+	def wakeup(self, siteId):
+		color = self._controller.configManager.getSiteAttribute(siteId=siteId, attribute="color", default=[0, 0, 255, 255])
+
+		if len(color) == 3:
+			color.append(255)
+
+		self._animator.doublePingPong(color=color, startAt=0, speed=30, duration=2)
 
 
 	def listen(self, *args):

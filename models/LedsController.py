@@ -23,6 +23,7 @@ class LedsController:
 		self._logger.info('Initializing leds controller')
 
 		self._mainClass = mainClass # type: HermesLedControl
+		self._configManager = mainClass._configManager
 
 		if self.INSTANCE is None:
 			self.INSTANCE = self
@@ -83,6 +84,10 @@ class LedsController:
 		self._animationThread = threading.Thread(target=self._runAnimation)
 		self._animationThread.setDaemon(True)
 
+
+	@property
+	def configManager(self):
+		return self._configManager
 
 	@property
 	def stickyAnimation(self):
@@ -204,8 +209,12 @@ class LedsController:
 				self._put(pattern, flush=flush, duration=duration, **kwargs)
 
 
-	def wakeup(self, sticky: bool = False):
-		self.putStickyPattern(self._pattern.wakeup, self._params.wakeupPattern, sticky)
+	def wakeupOther(self, siteId:str, sticky: bool = False):
+		self.putStickyPattern(self._pattern.wakeupOther, self._params.wakeupOther, sticky, siteId=siteId)
+
+
+	def wakeup(self, siteId:str, sticky: bool = False):
+		self.putStickyPattern(self._pattern.wakeup, self._params.wakeupPattern, sticky, siteId=siteId)
 
 
 	def listen(self, sticky: bool = False):
