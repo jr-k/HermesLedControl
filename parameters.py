@@ -10,7 +10,7 @@ parameters = {
 		},
 		"bureau": {
 			"color": [0, 0, 255, 255],
-			"start_animation": False
+			"start_animation": True
 		},
 		"chambre": {
 			"color": [0, 255, 0, 255],
