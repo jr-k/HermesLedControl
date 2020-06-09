@@ -137,7 +137,7 @@ class HermesLedControl:
 			self._hardware['endFrame'] = params.endFrame
 
 
-		self._configManager = ConfigManager()
+		self._configManager = ConfigManager(currentSiteId=self._me)
 		self._ledsController = LedsController(self)
 		self._mqttClient = self.connectMqtt()
 

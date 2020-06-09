@@ -3,7 +3,8 @@ from parameters import parameters
 
 class ConfigManager:
 
-	def __init__(self):
+	def __init__(self, currentSiteId):
+		self._currentSiteId = currentSiteId
 		self._logger = logging.getLogger('HermesLedControl')
 		self._logger.info('Initializing ConfigManager')
 
@@ -29,10 +30,16 @@ class ConfigManager:
 
 		return sites[siteId] if siteId in sites else None
 
-	def getSiteAttribute(self, siteId, attribute, default=None):
+	def getSiteAttribute(self, attribute, siteId=None, default=None):
+		if siteId is None:
+			siteId = self._currentSiteId
+
 		site = self.getSite(siteId=siteId)
 
 		if not site or attribute not in site:
 			return default
 
 		return site[attribute]
+
+	def getCurrentSiteId(self):
+		return self._currentSiteId

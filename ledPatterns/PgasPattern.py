@@ -76,7 +76,7 @@ class PgasPattern(LedPattern):
 			self.wakeup(siteId=siteId)
 
 	def wakeup(self, siteId):
-		color = self._controller.configManager.getSiteAttribute(siteId=siteId, attribute="color", default=[0, 0, 255, 255])
+		color = self._controller.configManager.getSiteAttribute(attribute="color", siteId=siteId, default=[0, 0, 255, 255])
 
 		if len(color) == 3:
 			color.append(255)
@@ -109,7 +109,10 @@ class PgasPattern(LedPattern):
 
 
 	def onStart(self, *args):
-		self._animator.rainbow(brightness=255, speed=500, duration=2)
+		startAnimation = self._controller.configManager.getSiteAttribute(attribute="start_animation", default=True)
+
+		if startAnimation:
+			self._animator.rainbow(brightness=255, speed=500, duration=2)
 
 
 
