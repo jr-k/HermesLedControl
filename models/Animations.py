@@ -12,7 +12,6 @@ class Animations:
 		self._image 		= list()
 		self.new()
 
-	@staticmethod
 	def zdiv(n, d):
 		return n / d if d else 0
 
@@ -89,7 +88,7 @@ class Animations:
 
 		while self._animationFlag.isSet():
 			self.rotateImageByAngle(degreesPerLed)
-			time.sleep(1 / abs(speed))
+			time.sleep(self.zdiv(1.0, abs(speed)))
 
 
 	def wheelOverlap(self, colors, brightness=255, speed=100, duration=0):
@@ -108,7 +107,7 @@ class Animations:
 			for color in colors:
 				for ledX in range(0, self._numLeds):
 					self._controller.setLedRGB(ledX, [color[0], color[1], color[2]], brightness)
-					if not self.sleepOrExit(1.0 / abs(speed)): return
+					if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 					self._controller.show()
 
 
@@ -178,7 +177,7 @@ class Animations:
 				self._controller.setLedRGB(negative, [color[0], color[1], color[2]], color[3])
 
 			self._controller.show()
-			time.sleep(1.0 / abs(speed))
+			time.sleep(self.zdiv(1.0, abs(speed)))
 
 
 	def breath(self, color, minBrightness, maxBrightness, speed=10, duration=0):
@@ -224,7 +223,7 @@ class Animations:
 
 			self._displayImage()
 
-			if not self.sleepOrExit(zdiv(1.0, abs(speed))): return
+			if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 
 
 	def rotateImage(self, step, preventDisplay=False):
@@ -317,7 +316,7 @@ class Animations:
 
 		self._animationFlag.set()
 		while self._animationFlag.isSet():
-			if not self.sleepOrExit(1.0 / abs(speed)): return
+			if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 			self.rotateImage(rotationSign)
 
 
@@ -359,7 +358,7 @@ class Animations:
 			self._setPixel(relayIndex, relayColor)
 			self._displayImage()
 			while self._animationFlag.isSet() and relayIndex != index:
-				if not self.sleepOrExit(1.0 / abs(speed)): return
+				if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 				self._setPixel(relayIndex, backgroundColor)
 				relayIndex = self._normalizeIndex(relayIndex + speedIncrement)
 
@@ -412,7 +411,7 @@ class Animations:
 				self._setPixel(leftIndex, color)
 				self._setPixel(rightIndex, color)
 				self._displayImage()
-				if not self.sleepOrExit(1.0 / abs(speed)): return
+				if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 				self._setPixel(leftIndex, backgroundColor)
 				self._setPixel(rightIndex, backgroundColor)
 			while self._animationFlag.isSet() and step >= 0:
@@ -422,7 +421,7 @@ class Animations:
 				self._setPixel(leftIndex, color)
 				self._setPixel(rightIndex, color)
 				self._displayImage()
-				if not self.sleepOrExit(1.0 / abs(speed)): return
+				if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 				self._setPixel(leftIndex, backgroundColor)
 				self._setPixel(rightIndex, backgroundColor)
 
@@ -456,7 +455,7 @@ class Animations:
 		index = startAt
 		self._animationFlag.set()
 		while self._animationFlag.isSet():
-			if not self.sleepOrExit(1.0 / abs(speed)): return
+			if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 			self._displayImage()
 			index += 1
 			index = self._normalizeIndex(index)
@@ -514,7 +513,7 @@ class Animations:
 					self._image[i] = color[0], color[1], color[2], bri + 1
 
 				self._displayImage()
-				if not self.sleepOrExit(1.0 / abs(speed)): return
+				if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 
 			while self._animationFlag.isSet() and bri > minBrightness:
 				bri = self._image[0][3]
@@ -526,7 +525,7 @@ class Animations:
 					self._image[i] = color[0], color[1], color[2], bri - 1
 
 				self._displayImage()
-				if not self.sleepOrExit(1.0 / abs(speed)): return
+				if not self.sleepOrExit(self.zdiv(1.0, abs(speed))): return
 
 			turn +=1
 
