@@ -12,7 +12,7 @@ class Animations:
 		self._image 		= list()
 		self.new()
 
-	def zdiv(n, d):
+	def zdiv(self, n, d):
 		return n / d if d else 0
 
 	def sleepOrExit(self, t):
