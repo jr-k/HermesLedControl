@@ -244,7 +244,7 @@ class HermesLedControl:
 				self._ledsController.wakeup(siteId, sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On hotword received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On hotword received but it wasn't for me ("+self._me+"/"+siteId+")")
 				self._ledsController.wakeupOther(siteId, sticky)
 
 		elif message.topic == self._SUB_ON_LISTENING:
@@ -254,7 +254,7 @@ class HermesLedControl:
 				self._ledsController.listen(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On listen received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On listen received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_SAY:
 			if isForMe:
@@ -263,7 +263,7 @@ class HermesLedControl:
 				self._ledsController.speak(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On say received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On say received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_THINK:
 			if isForMe:
@@ -272,7 +272,7 @@ class HermesLedControl:
 				self._ledsController.think(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On think received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On think received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_HOTWORD_TOGGLE_ON:
 			if isForMe:
@@ -281,7 +281,7 @@ class HermesLedControl:
 				self._ledsController.idle()
 			else:
 				if self._params.debug:
-					self._logger.debug("On hotword toggle on received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On hotword toggle on received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_TTS_FINISHED:
 			if isForMe:
@@ -290,7 +290,7 @@ class HermesLedControl:
 				self._ledsController.idle()
 			else:
 				if self._params.debug:
-					self._logger.debug("On tts finished received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On tts finished received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_LEDS_TOGGLE_ON:
 			if isForMe:
@@ -299,7 +299,7 @@ class HermesLedControl:
 				self._ledsController.toggleStateOn()
 			else:
 				if self._params.debug:
-					self._logger.debug("On leds toggle on received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On leds toggle on received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_LEDS_TOGGLE_OFF:
 			if isForMe:
@@ -308,7 +308,7 @@ class HermesLedControl:
 				self._ledsController.toggleStateOff()
 			else:
 				if self._params.debug:
-					self._logger.debug("On leds toggle off received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On leds toggle off received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_LEDS_TOGGLE:
 			if isForMe:
@@ -317,7 +317,7 @@ class HermesLedControl:
 				self._ledsController.toggleState()
 			else:
 				if self._params.debug:
-					self._logger.debug("On leds toggle received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On leds toggle received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_LEDS_ON_SUCCESS:
 			if isForMe:
@@ -326,7 +326,7 @@ class HermesLedControl:
 				self._ledsController.onSuccess(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On success received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On success received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_LEDS_ON_ERROR:
 			if isForMe:
@@ -335,7 +335,7 @@ class HermesLedControl:
 				self._ledsController.onError(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On error received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On error received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_UPDATING:
 			if isForMe:
@@ -344,7 +344,7 @@ class HermesLedControl:
 				self._ledsController.updating(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On updating received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On updating received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_CALL:
 			if isForMe:
@@ -353,7 +353,7 @@ class HermesLedControl:
 				self._ledsController.call(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On call received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On call received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_SETUP_MODE:
 			if isForMe:
@@ -362,7 +362,7 @@ class HermesLedControl:
 				self._ledsController.setupMode(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On setup mode received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On setup mode received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_CON_ERROR:
 			if isForMe:
@@ -371,7 +371,7 @@ class HermesLedControl:
 				self._ledsController.conError(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On connection error received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On connection error received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_MESSAGE:
 			if isForMe:
@@ -380,7 +380,7 @@ class HermesLedControl:
 				self._ledsController.message(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On message received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On message received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_DND:
 			if isForMe:
@@ -389,7 +389,7 @@ class HermesLedControl:
 				self._ledsController.dnd(sticky)
 			else:
 				if self._params.debug:
-					self._logger.debug("On do not disturb received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On do not disturb received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_START:
 			if isForMe:
@@ -398,7 +398,7 @@ class HermesLedControl:
 				self._ledsController.start()
 			else:
 				if self._params.debug:
-					self._logger.debug("On start received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On start received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_STOP:
 			if isForMe:
@@ -407,7 +407,7 @@ class HermesLedControl:
 				self._ledsController.stop()
 			else:
 				if self._params.debug:
-					self._logger.debug("On stop received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On stop received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_VOLUME_SET:
 			if isForMe:
@@ -419,7 +419,7 @@ class HermesLedControl:
 					self._ledsController.setVolume(payload['volume'])
 			else:
 				if self._params.debug:
-					self._logger.debug("On volume set received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On volume set received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_VADLED_SET:
 			if isForMe:
@@ -431,7 +431,7 @@ class HermesLedControl:
 					self._ledsController.setVadLed(payload['state'])
 			else:
 				if self._params.debug:
-					self._logger.debug("On vad led set received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On vad led set received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_LEDS_IDLE:
 			if isForMe:
@@ -441,7 +441,7 @@ class HermesLedControl:
 				self._ledsController.idle()
 			else:
 				if self._params.debug:
-					self._logger.debug("On leds idle received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On leds idle received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_ON_LEDS_CLEAR:
 			self._ledsController.stickyAnimation = None
@@ -452,7 +452,7 @@ class HermesLedControl:
 				self._ledsController.clearLeds()
 			else:
 				if self._params.debug:
-					self._logger.debug("On leds clear received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On leds clear received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 		elif message.topic == self._SUB_MANUAL_ANIMATIONS_SET:
 			if isForMe:
@@ -583,7 +583,7 @@ class HermesLedControl:
 						)
 			else:
 				if self._params.debug:
-					self._logger.debug("On manual animation leds received but it wasn't for me ("+self._me+")")
+					self._logger.debug("On manual animation leds received but it wasn't for me ("+self._me+"/"+siteId+")")
 
 
 	def safePayloadColor(self, payload, attributeName, default=None):
