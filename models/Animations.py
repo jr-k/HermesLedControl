@@ -224,7 +224,7 @@ class Animations:
 
 			self._displayImage()
 
-			if not self.sleepOrExit(zdiv(1.0, abs(speed)): return
+			if not self.sleepOrExit(zdiv(1.0, abs(speed))): return
 
 
 	def rotateImage(self, step, preventDisplay=False):
