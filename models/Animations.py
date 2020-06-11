@@ -12,6 +12,9 @@ class Animations:
 		self._image 		= list()
 		self.new()
 
+	@staticmethod
+	def zdiv(n, d):
+		return n / d if d else 0
 
 	def sleepOrExit(self, t):
 		if not self._animationFlag.isSet():
@@ -36,7 +39,7 @@ class Animations:
 		elif trailAttenuation < 0:
 			trailAttenuation = 0
 
-		maxTrail = 0 if len(colors) == 0 else (self._numLeds - len(colors)) /  len(colors)
+		maxTrail = 0 if len(colors) == 0 else (self._numLeds - len(colors)) / len(colors)
 
 		if trail > maxTrail:
 			trail = maxTrail
@@ -221,7 +224,7 @@ class Animations:
 
 			self._displayImage()
 
-			if not self.sleepOrExit(1.0 / abs(speed)): return
+			if not self.sleepOrExit(zdiv(1.0, abs(speed)): return
 
 
 	def rotateImage(self, step, preventDisplay=False):
