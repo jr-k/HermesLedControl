@@ -25,7 +25,7 @@ parameters = {
 			"start_animation": False
 		},
 		"toilettes": {
-			"color": [255,127,0,255],
+			"color": [255,35,0,255],
 			"start_animation": False
 		}
 	}
